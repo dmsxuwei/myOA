@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dms.oa.mapper.UnittestMapper" >
+  <resultMap id="BaseResultMap" type="com.dms.oa.po.Unittest" >
+    <id column="unittestid" property="unittestid" jdbcType="INTEGER" />
+    <result column="usrid" property="usrid" jdbcType="INTEGER" />
+    <result column="testproject" property="testproject" jdbcType="VARCHAR" />
+    <result column="testunit" property="testunit" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="INTEGER" />
+    <result column="testtime" property="testtime" jdbcType="TIMESTAMP" />
+    <result column="bak" property="bak" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIME" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    unittestid, usrid, testproject, testunit, result, testtime, bak, createtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dms.oa.po.UnittestExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from unittest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from unittest
+    where unittestid = #{unittestid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from unittest
+    where unittestid = #{unittestid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dms.oa.po.UnittestExample" >
+    delete from unittest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dms.oa.po.Unittest" >
+    insert into unittest (unittestid, usrid, testproject, 
+      testunit, result, testtime, 
+      bak, createtime)
+    values (#{unittestid,jdbcType=INTEGER}, #{usrid,jdbcType=INTEGER}, #{testproject,jdbcType=VARCHAR}, 
+      #{testunit,jdbcType=VARCHAR}, #{result,jdbcType=INTEGER}, #{testtime,jdbcType=TIMESTAMP}, 
+      #{bak,jdbcType=VARCHAR}, #{createtime,jdbcType=TIME})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dms.oa.po.Unittest" >
+    insert into unittest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unittestid != null" >
+        unittestid,
+      </if>
+      <if test="usrid != null" >
+        usrid,
+      </if>
+      <if test="testproject != null" >
+        testproject,
+      </if>
+      <if test="testunit != null" >
+        testunit,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="testtime != null" >
+        testtime,
+      </if>
+      <if test="bak != null" >
+        bak,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unittestid != null" >
+        #{unittestid,jdbcType=INTEGER},
+      </if>
+      <if test="usrid != null" >
+        #{usrid,jdbcType=INTEGER},
+      </if>
+      <if test="testproject != null" >
+        #{testproject,jdbcType=VARCHAR},
+      </if>
+      <if test="testunit != null" >
+        #{testunit,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="testtime != null" >
+        #{testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bak != null" >
+        #{bak,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIME},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dms.oa.po.UnittestExample" resultType="java.lang.Integer" >
+    select count(*) from unittest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update unittest
+    <set >
+      <if test="record.unittestid != null" >
+        unittestid = #{record.unittestid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usrid != null" >
+        usrid = #{record.usrid,jdbcType=INTEGER},
+      </if>
+      <if test="record.testproject != null" >
+        testproject = #{record.testproject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testunit != null" >
+        testunit = #{record.testunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=INTEGER},
+      </if>
+      <if test="record.testtime != null" >
+        testtime = #{record.testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bak != null" >
+        bak = #{record.bak,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIME},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update unittest
+    set unittestid = #{record.unittestid,jdbcType=INTEGER},
+      usrid = #{record.usrid,jdbcType=INTEGER},
+      testproject = #{record.testproject,jdbcType=VARCHAR},
+      testunit = #{record.testunit,jdbcType=VARCHAR},
+      result = #{record.result,jdbcType=INTEGER},
+      testtime = #{record.testtime,jdbcType=TIMESTAMP},
+      bak = #{record.bak,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=TIME}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dms.oa.po.Unittest" >
+    update unittest
+    <set >
+      <if test="usrid != null" >
+        usrid = #{usrid,jdbcType=INTEGER},
+      </if>
+      <if test="testproject != null" >
+        testproject = #{testproject,jdbcType=VARCHAR},
+      </if>
+      <if test="testunit != null" >
+        testunit = #{testunit,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=INTEGER},
+      </if>
+      <if test="testtime != null" >
+        testtime = #{testtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bak != null" >
+        bak = #{bak,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIME},
+      </if>
+    </set>
+    where unittestid = #{unittestid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dms.oa.po.Unittest" >
+    update unittest
+    set usrid = #{usrid,jdbcType=INTEGER},
+      testproject = #{testproject,jdbcType=VARCHAR},
+      testunit = #{testunit,jdbcType=VARCHAR},
+      result = #{result,jdbcType=INTEGER},
+      testtime = #{testtime,jdbcType=TIMESTAMP},
+      bak = #{bak,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIME}
+    where unittestid = #{unittestid,jdbcType=INTEGER}
+  </update>
+</mapper>

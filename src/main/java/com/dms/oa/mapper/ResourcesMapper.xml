@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dms.oa.mapper.ResourcesMapper" >
+  <resultMap id="BaseResultMap" type="com.dms.oa.po.Resources" >
+    <id column="resourceid" property="resourceid" jdbcType="INTEGER" />
+    <result column="rosoucename" property="rosoucename" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="parentid" property="parentid" jdbcType="INTEGER" />
+    <result column="isend" property="isend" jdbcType="INTEGER" />
+    <result column="catagory" property="catagory" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    resourceid, rosoucename, addr, parentid, isend, catagory
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dms.oa.po.ResourcesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from resources
+    where resourceid = #{resourceid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from resources
+    where resourceid = #{resourceid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dms.oa.po.ResourcesExample" >
+    delete from resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dms.oa.po.Resources" >
+    insert into resources (resourceid, rosoucename, addr, 
+      parentid, isend, catagory
+      )
+    values (#{resourceid,jdbcType=INTEGER}, #{rosoucename,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, 
+      #{parentid,jdbcType=INTEGER}, #{isend,jdbcType=INTEGER}, #{catagory,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dms.oa.po.Resources" >
+    insert into resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resourceid != null" >
+        resourceid,
+      </if>
+      <if test="rosoucename != null" >
+        rosoucename,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+      <if test="isend != null" >
+        isend,
+      </if>
+      <if test="catagory != null" >
+        catagory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resourceid != null" >
+        #{resourceid,jdbcType=INTEGER},
+      </if>
+      <if test="rosoucename != null" >
+        #{rosoucename,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="isend != null" >
+        #{isend,jdbcType=INTEGER},
+      </if>
+      <if test="catagory != null" >
+        #{catagory,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dms.oa.po.ResourcesExample" resultType="java.lang.Integer" >
+    select count(*) from resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update resources
+    <set >
+      <if test="record.resourceid != null" >
+        resourceid = #{record.resourceid,jdbcType=INTEGER},
+      </if>
+      <if test="record.rosoucename != null" >
+        rosoucename = #{record.rosoucename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addr != null" >
+        addr = #{record.addr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null" >
+        parentid = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isend != null" >
+        isend = #{record.isend,jdbcType=INTEGER},
+      </if>
+      <if test="record.catagory != null" >
+        catagory = #{record.catagory,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update resources
+    set resourceid = #{record.resourceid,jdbcType=INTEGER},
+      rosoucename = #{record.rosoucename,jdbcType=VARCHAR},
+      addr = #{record.addr,jdbcType=VARCHAR},
+      parentid = #{record.parentid,jdbcType=INTEGER},
+      isend = #{record.isend,jdbcType=INTEGER},
+      catagory = #{record.catagory,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dms.oa.po.Resources" >
+    update resources
+    <set >
+      <if test="rosoucename != null" >
+        rosoucename = #{rosoucename,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="isend != null" >
+        isend = #{isend,jdbcType=INTEGER},
+      </if>
+      <if test="catagory != null" >
+        catagory = #{catagory,jdbcType=INTEGER},
+      </if>
+    </set>
+    where resourceid = #{resourceid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dms.oa.po.Resources" >
+    update resources
+    set rosoucename = #{rosoucename,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      parentid = #{parentid,jdbcType=INTEGER},
+      isend = #{isend,jdbcType=INTEGER},
+      catagory = #{catagory,jdbcType=INTEGER}
+    where resourceid = #{resourceid,jdbcType=INTEGER}
+  </update>
+</mapper>
