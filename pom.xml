@@ -13,7 +13,7 @@
 	<!-- frameworks -->
 		<org.springframework.version>4.2.4.RELEASE</org.springframework.version>
 		<org.apache.struts.version>2.3.15.1</org.apache.struts.version>
-		<jackson_version>2.5.2</jackson_version>
+		<jackson_version>2.12.7.1</jackson_version>
 		<!--configuration -->
 		<configuratcion_version>1.10</configuratcion_version>
 	</properties>
